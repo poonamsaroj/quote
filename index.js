@@ -3,7 +3,6 @@ const app = express();
 var axios = require('axios');
 
 
-
 app.set("view engine", "ejs")
 
 app.get('/', (req, res, next) => {

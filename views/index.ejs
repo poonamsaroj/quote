@@ -17,25 +17,24 @@
         body {
             height: 100vh;
             margin: 0px;
-            background-image: linear-gradient(180deg, rgb(102, 166, 170), rgb(255, 255, 255));
+            background-image: linear-gradient(180deg, rgb(114, 140, 142), rgb(255, 255, 255));
             overflow: hidden !important;
         }
 
         .flex-container {
-            margin-top: 100px;
+            margin-top: 200px;
         }
 
         .heading {
-            top: 50%;
             text-align: center;
-            color: #F7B0BB;
+            color: #cf6d7b;
             font-style: italic;
             font-family: 'Qwitcher Grypen', cursive;
             font-size: 5rem;
         }
 
         .card {
-            width: 500px;
+            width: 600px;
             text-align: center;
             margin: 0 auto;
             box-shadow: 5px 10px 18px #b0aeaf;
@@ -45,12 +44,13 @@
             font-family: Georgia, serif;
             font-size: 18px;
             font-style: italic;
-            width: 500px;
-            margin: 0.25em 0;
+            width: 100%;
+            margin: 0 auto;
             padding: 0.35em 40px;
             line-height: 1.45;
             position: relative;
             color: #383838;
+            text-align: center;
         }
 
         blockquote:before {
@@ -84,11 +84,13 @@
         <div class="card text-center flex-child">
             <div class="card-body">
                 <h5 class="card-title">
-                    <blockquote id="quote">
-                        <%= quote %>
-                            <cite id="cite">
-                                <%= name %>
-                            </cite>
+                    <blockquote>
+                        <span id="quote">
+                            <%= quote %>
+                        </span>
+                        <cite id="cite">
+                            <%= name %>
+                        </cite>
                     </blockquote>
                 </h5>
                 <a href="#" onclick="postCall()" class="btn btn-info">Generate New Quote</a>
@@ -110,10 +112,11 @@
             try {
                 let response = await fetch('/', { method: 'POST' });
                 let body = await response.text();
-                console.log(JSON.parse(body[0]["q"]));
-                console.log(JSON.parse(body[0]["a"]));
-                document.getElementById(quote)
-                document.getElementById(name)
+                debugger;
+                console.log(JSON.parse(body)[0]['a']);
+                console.log(JSON.parse(body)[0]['q']);
+                document.getElementById("quote").innerHTML = JSON.parse(body)[0]['q'];
+                document.getElementById("cite").innerHTML = JSON.parse(body)[0]['a'];
             }
             catch (exception) {
                 console.log(exception);
